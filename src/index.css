@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Warm editorial design system. All colors HSL. */
+@layer base {
+  :root {
+    --background: 38 33% 96%;          /* warm cream */
+    --foreground: 25 25% 14%;          /* deep espresso */
+
+    --card: 38 40% 98%;
+    --card-foreground: 25 25% 14%;
+
+    --popover: 38 40% 98%;
+    --popover-foreground: 25 25% 14%;
+
+    --primary: 18 35% 22%;             /* rich cocoa */
+    --primary-foreground: 38 40% 97%;
+
+    --secondary: 32 28% 88%;           /* warm sand */
+    --secondary-foreground: 25 25% 14%;
+
+    --muted: 36 22% 90%;
+    --muted-foreground: 25 12% 38%;
+
+    --accent: 12 55% 48%;              /* terracotta */
+    --accent-foreground: 38 40% 98%;
+
+    --destructive: 0 70% 42%;
+    --destructive-foreground: 38 40% 98%;
+
+    --border: 30 20% 84%;
+    --input: 30 20% 84%;
+    --ring: 18 35% 22%;
+
+    --radius: 0.25rem;
+
+    --sidebar-background: 38 33% 96%;
+    --sidebar-foreground: 25 25% 14%;
+    --sidebar-primary: 18 35% 22%;
+    --sidebar-primary-foreground: 38 40% 97%;
+    --sidebar-accent: 36 22% 90%;
+    --sidebar-accent-foreground: 25 25% 14%;
+    --sidebar-border: 30 20% 84%;
+    --sidebar-ring: 18 35% 22%;
+  }
+
+  .dark {
+    --background: 25 18% 10%;
+    --foreground: 38 33% 94%;
+    --card: 25 18% 12%;
+    --card-foreground: 38 33% 94%;
+    --popover: 25 18% 12%;
+    --popover-foreground: 38 33% 94%;
+    --primary: 38 33% 94%;
+    --primary-foreground: 25 25% 14%;
+    --secondary: 25 12% 18%;
+    --secondary-foreground: 38 33% 94%;
+    --muted: 25 12% 18%;
+    --muted-foreground: 36 14% 65%;
+    --accent: 12 55% 55%;
+    --accent-foreground: 25 18% 10%;
+    --destructive: 0 60% 45%;
+    --destructive-foreground: 38 33% 94%;
+    --border: 25 12% 22%;
+    --input: 25 12% 22%;
+    --ring: 38 33% 94%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Fraunces', Georgia, serif;
+    font-optical-sizing: auto;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .container-editorial { @apply mx-auto w-full max-w-7xl px-6 md:px-10; }
+}

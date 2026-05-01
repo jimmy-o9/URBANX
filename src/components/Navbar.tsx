@@ -209,6 +209,11 @@ export const Navbar = () => {
                 <Link to="/change-password" onClick={() => setOpen(false)} className="py-2 text-sm text-muted-foreground">
                   Change Password
                 </Link>
+                {isAdmin && (
+                  <Link to="/admin" onClick={() => setOpen(false)} className="py-2 text-sm text-muted-foreground">
+                    Admin Panel
+                  </Link>
+                )}
                 <button
                   onClick={() => {
                     signOut();

@@ -241,7 +241,7 @@ const AdminOrders = () => {
                                                             <p className="text-sm text-muted-foreground">
                                                                 ₹{item.price || item.unit_price} × {item.quantity}
                                                                 {item.size && (
-                                                                    <span className="ml-2 text-xs text-muted-foreground">
+                                                                    <span className="ml-2 rounded bg-accent/10 px-2 py-0.5 text-xs font-medium text-accent">
                                                                         (Size: {item.size})
                                                                     </span>
                                                                 )}

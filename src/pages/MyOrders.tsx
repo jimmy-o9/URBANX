@@ -138,7 +138,13 @@ const MyOrders = () => {
                           <div>
                             <p className="font-medium">{item.name}</p>
                             <p className="text-sm text-muted-foreground">
-                              ₹{item.price} × {item.quantity}
+                              ₹{item.price || item.unit_price} × {item.quantity}
+
+                              {item.size && (
+                                <span className="ml-2 rounded bg-accent/10 px-2 py-0.5 text-xs font-medium text-accent">
+                                  Size: {item.size}
+                                </span>
+                              )}
                             </p>
                           </div>
                         </div>

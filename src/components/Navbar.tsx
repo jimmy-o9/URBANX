@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ShoppingBag, User as UserIcon, Menu, X } from "lucide-react";
+import { ShoppingBag, User as UserIcon, Menu, X, Moon, Sun } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState, useRef, useEffect } from "react";
@@ -18,6 +18,7 @@ export const Navbar = () => {
   const { count } = useCart();
   const { user, signOut } = useAuth();
   const location = useLocation();
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const [open, setOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
@@ -41,6 +42,31 @@ export const Navbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      setIsDarkMode(true);
+      return;
+    }
+
+    document.documentElement.classList.remove("dark");
+    setIsDarkMode(false);
+  }, []);
+
+  const toggleTheme = () => {
+    const nextIsDark = !isDarkMode;
+    setIsDarkMode(nextIsDark);
+
+    if (nextIsDark) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  };
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
@@ -84,6 +110,16 @@ export const Navbar = () => {
         </nav>
 
         <div className="flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleTheme}
+            aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+            title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          </Button>
+
           {user ? (
             <div ref={dropdownRef} className="relative hidden md:block">
               <Button
@@ -200,6 +236,12 @@ export const Navbar = () => {
 
             {user ? (
               <>
+                <button
+                  onClick={toggleTheme}
+                  className="py-2 text-left text-sm text-muted-foreground"
+                >
+                  {isDarkMode ? "Light Mode" : "Dark Mode"}
+                </button>
                 <Link to="/profile" onClick={() => setOpen(false)} className="py-2 text-sm text-muted-foreground">
                   My Profile
                 </Link>
@@ -225,13 +267,21 @@ export const Navbar = () => {
                 </button>
               </>
             ) : (
-              <Link
-                to="/register"
-                onClick={() => setOpen(false)}
-                className="py-2 text-sm text-muted-foreground"
-              >
-                Sign Up
-              </Link>
+              <>
+                <button
+                  onClick={toggleTheme}
+                  className="py-2 text-left text-sm text-muted-foreground"
+                >
+                  {isDarkMode ? "Light Mode" : "Dark Mode"}
+                </button>
+                <Link
+                  to="/register"
+                  onClick={() => setOpen(false)}
+                  className="py-2 text-sm text-muted-foreground"
+                >
+                  Sign Up
+                </Link>
+              </>
             )}
           </nav>
         </div>
